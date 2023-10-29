@@ -1,0 +1,6 @@
+src/@types/*
+src/@types
+.yarn
+
+node_modules
+dist
