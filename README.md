@@ -29,6 +29,32 @@ auto-type-env -p .env -t ./src/@types/environment.d.ts
 auto-type-env # will use default values
 ```
 
+## Example
+
+Imagine you have a .env like this:
+
+```env
+ULTRA_SECRET_VARIABLE=value
+ANOTHER_SECRET=value2
+```
+
+This library will generate something like:
+
+```ts
+export {};
+
+declare global {
+  namespace NodeJS {
+    interface ProcessEnv {
+      ULTRA_SECRET_VARIABLE: string,
+      ANOTHER_SECRET: string
+    }
+  }
+}
+```
+
+Then you will have all the items available for you when you type `process.env`
+
 <!-- For more detailed usage examples and API documentation, please refer to our [Wiki](https://github.com/Lucas-Gardini/auto-type-env/wiki). -->
 
 ## Contribution
