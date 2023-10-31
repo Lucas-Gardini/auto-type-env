@@ -22,7 +22,7 @@ npx auto-type-env
 Here's a quick example to get you started with auto-type-env:
 
 ```bash
-auto-type-env -p .env -t ./src/@types/environment.d.ts
+auto-type-env -p .env -t ./src/environment.d.ts
 
 # or
 
@@ -44,12 +44,12 @@ This library will generate something like:
 export {};
 
 declare global {
-  namespace NodeJS {
-    interface ProcessEnv {
-      ULTRA_SECRET_VARIABLE: string,
-      ANOTHER_SECRET: string
-    }
-  }
+	namespace NodeJS {
+		interface ProcessEnv {
+			ULTRA_SECRET_VARIABLE: string;
+			ANOTHER_SECRET: string;
+		}
+	}
 }
 ```
 

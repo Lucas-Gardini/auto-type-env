@@ -1,5 +1,4 @@
-src/@types/*
-src/@types
+src/environment.d.ts
 .yarn
 
 node_modules

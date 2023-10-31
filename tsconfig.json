@@ -18,11 +18,10 @@
 		"bin",
 		"commands",
 		"lib",
-		"src"
+		"src",
 	],
 	"exclude": [
 		"node_modules",
 		"e2e",
-		"src/@types/*"
 	]
 }

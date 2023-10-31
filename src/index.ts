@@ -25,18 +25,18 @@ program
 	.version("1.0.0")
 	.description("Generate TypeScript types from .env files")
 	.option("-p, --path <path>", "Specify the path to the .env file (default: ./env)")
-	.option("-t, --types <types>", "Specify the path to save the types (default: ./src/@types/environment.d.ts)")
+	.option("-t, --types <types>", "Specify the path to save the types (default: ./src/environment.d.ts)")
 	.parse(process.argv);
 
 const options = program.opts();
 const path = options.path || "./.env";
-const typesPath = options.types || "./src/@types/environment.d.ts";
+const typesPath = options.path ? (options?.path?.includes(".d.ts") ? options.path : options.path + "environment.d.ts") : "./src/environment.d.ts";
 
 // Criar diretórios se não existirem
 mkdirp.sync(typesPath.substring(0, typesPath.lastIndexOf("/")));
 
 if (fs.existsSync(path)) {
-	const fileContent = parseDotEnv(path);
+	const fileContent = parseDotEnv(path).replaceAll('"', "");
 
 	fs.writeFileSync(typesPath, dtsFile.replace("[PARSED_ENV]", fileContent));
 
