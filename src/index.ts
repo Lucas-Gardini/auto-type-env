@@ -30,7 +30,7 @@ program
 
 const options = program.opts();
 const path = options.path || "./.env";
-const typesPath = options.path ? (options?.path?.includes(".d.ts") ? options.path : options.path + "environment.d.ts") : "./src/environment.d.ts";
+const typesPath = options.types ? (options?.path?.includes(".d.ts") ? options.types : options.types + "/environment.d.ts") : "./src/environment.d.ts";
 
 // Criar diretórios se não existirem
 mkdirp.sync(typesPath.substring(0, typesPath.lastIndexOf("/")));
