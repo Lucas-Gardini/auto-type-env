@@ -32,7 +32,11 @@ program
 
 const options = program.opts();
 const path = options.path || "./.env";
-const typesPath = options.types ? (options?.path?.includes(".d.ts") ? options.types : options.types + "/environment.d.ts") : "./src/environment.d.ts";
+const typesPath = options.types
+	? options?.types?.includes(".d.ts")
+		? options.types
+		: options.types + "/environment.d.ts"
+	: "./src/environment.d.ts";
 
 if (!typesPath.endsWith(".d.ts")) {
 	console.log(chalk.red("Types file must have a .d.ts extension!"));
