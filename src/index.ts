@@ -34,13 +34,16 @@ const options = program.opts();
 const path = options.path || "./.env";
 const typesPath = options.types ? (options?.path?.includes(".d.ts") ? options.types : options.types + "/environment.d.ts") : "./src/environment.d.ts";
 
-// Criar diretórios se não existirem
-mkdirp.sync(typesPath.substring(0, typesPath.lastIndexOf("/")));
-
-if (fs.existsSync(path)) {
-	const fileContent = parseDotEnv(path).replaceAll('"', "");
-	fs.writeFileSync(typesPath, dtsFile.replace("[PARSED_ENV]", fileContent));
-	console.log(chalk.green(`Types generated ${chalk.white("@")} ${chalk.blue(typesPath)}`));
+if (!typesPath.endsWith(".d.ts")) {
+	console.log(chalk.red("Types file must have a .d.ts extension!"));
 } else {
-	console.log(chalk.red(".env file not found!"));
+	const parentTypesDir = typesPath.substring(0, typesPath.lastIndexOf("/"));
+
+	if (!fs.existsSync(parentTypesDir)) mkdirp.sync(parentTypesDir);
+	if (!fs.existsSync(path)) console.log(chalk.red(".env file not found!"));
+	else {
+		const fileContent = parseDotEnv(path).replaceAll('"', "");
+		fs.writeFileSync(typesPath, dtsFile.replace("[PARSED_ENV]", fileContent));
+		console.log(chalk.green(`Types generated ${chalk.white("@")} ${chalk.blue(typesPath)}`));
+	}
 }
