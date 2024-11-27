@@ -1,6 +1,6 @@
 {
 	"name": "auto-type-env",
-	"version": "1.1.2",
+	"version": "1.1.3",
 	"description": "A simple library for auto creating types for your .env file",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
