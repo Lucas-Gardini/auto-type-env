@@ -22,11 +22,11 @@ npx auto-type-env
 Here's a quick example to get you started with auto-type-env:
 
 ```bash
-auto-type-env -p .env -t ./src/environment.d.ts
+auto-type-env --path .env --types ./src/environment.d.ts
 
 # or
 
-auto-type-env # will use default values
+auto-type-env # will use default values (./.env, ./src/environment.d.ts)
 ```
 
 ## Example
@@ -44,18 +44,30 @@ This library will generate something like:
 export {};
 
 declare global {
-	namespace NodeJS {
-		interface ProcessEnv {
-			ULTRA_SECRET_VARIABLE: string;
-			ANOTHER_SECRET: string;
-		}
-	}
+ namespace NodeJS {
+  interface ProcessEnv {
+   ULTRA_SECRET_VARIABLE: string;
+   ANOTHER_SECRET: string;
+  }
+ }
 }
 ```
 
-Then you will have all the items available for you when you type `process.env`
+## Tip
 
-<!-- For more detailed usage examples and API documentation, please refer to our [Wiki](https://github.com/Lucas-Gardini/auto-type-env/wiki). -->
+A great way to implement this to your project, is creating a custom script in your `package.json`:
+
+```json
+{
+ "scripts": {
+  "gen:env": "auto-type-env --path .env --types ./src/environment.d.ts"
+ }
+}
+```
+
+Then you can run `npm run generate-env` or `yarn generate-env` to generate the types.
+
+Then you will have all the items available for you when you type `process.env`
 
 ## Contribution
 
@@ -68,8 +80,6 @@ auto-type-env is [MIT licensed](https://opensource.org/licenses/MIT), which mean
 ## Contact
 
 If you have any questions, suggestions, or feedback, you can reach me at <contato@lucasgardini.com>.
-
-<!-- Visit our website: [https://www.threadx.com](https://www.threadx.com) -->
 
 ---
 
